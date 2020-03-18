@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  prod:
+    build:
+      context: .
+    command: npm run build
+
+  dev:
+    build:
+      context: .
+    ports:
+      - 3000:3000
+    command: npm start
+    volumes:
+      - "./src:/usr/src/app/src"
+
+  test:
+    build:
+      context: .
+    ports:
+      - 5000:5000
+    environment:
+      - CI=true
+    command: npm test
+    volumes:
+      - "./src:/usr/src/app/src"
